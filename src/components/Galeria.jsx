@@ -2,43 +2,43 @@ import { useState, useEffect } from "react";
 
 const fotos = [
   {
-    archivo: "/fotos/fachada-frontal.jpg",
+    archivo: `${import.meta.env.BASE_URL}fotos/fachada-frontal.jpg`,
     titulo: "Fachada principal",
     etiqueta: "Nodo de alta visibilidad",
     descripcion: "Fachada doble sobre dos vías. Desde sistemas, representa un nodo con exposición máxima al flujo urbano.",
   },
   {
-    archivo: "/fotos/esquina-curva.jpg",
+    archivo: `${import.meta.env.BASE_URL}fotos/esquina-curva.jpg`,
     titulo: "Esquina curva",
     etiqueta: "Punto de confluencia",
     descripcion: "La curva del edificio actúa como concentrador de atención desde múltiples ángulos — ideal para señalética digital.",
   },
   {
-    archivo: "/fotos/interseccion.jpg",
+    archivo: `${import.meta.env.BASE_URL}fotos/interseccion.jpg`,
     titulo: "Intersección vial",
     etiqueta: "Nodo de tráfico activo",
     descripcion: "Cruce con semáforo de alta frecuencia. Alto flujo peatonal y vehicular — potencial de impacto digital masivo.",
   },
   {
-    archivo: "/fotos/cableado.jpg",
+    archivo: `${import.meta.env.BASE_URL}fotos/cableado.jpg`,
     titulo: "Infraestructura de red",
     etiqueta: "Red existente confirmada",
     descripcion: "Cableado mixto eléctrico y de telecomunicaciones visible. Infraestructura base disponible para conectividad.",
   },
   {
-    archivo: "/fotos/calle-lateral.jpg",
+    archivo: `${import.meta.env.BASE_URL}fotos/calle-lateral.jpg`,
     titulo: "Acceso lateral",
     etiqueta: "Entrada secundaria",
     descripcion: "Calle de bajo tráfico en el costado del edificio. Zona tranquila para acceso alternativo al museo.",
   },
   {
-    archivo: "/fotos/contexto-urbano.jpg",
+    archivo: `${import.meta.env.BASE_URL}fotos/contexto-urbano.jpg`,
     titulo: "Contraste urbano",
     etiqueta: "Zona de transición",
     descripcion: "Edificios modernos de 15+ pisos a media cuadra. El lote está en una zona de alta densidad y transformación urbana.",
   },
   {
-    archivo: "/fotos/via-principal.jpg",
+    archivo: `${import.meta.env.BASE_URL}fotos/via-principal.jpg`,
     titulo: "Vía principal",
     etiqueta: "Corredor de flujo",
     descripcion: "Vía arterial con tráfico constante. Confirma la visibilidad del lugar desde el sistema vial de Bogotá.",

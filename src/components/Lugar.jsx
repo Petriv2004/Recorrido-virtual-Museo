@@ -58,7 +58,7 @@ export default function Lugar() {
                 }}
             >
                 <img
-                    src="/fotos/antes.jpg"
+                    src={`${import.meta.env.BASE_URL}fotos/antes.jpg`}
                     alt="Estado actual"
                     style={{
                         position: "absolute",
@@ -72,7 +72,7 @@ export default function Lugar() {
                     }}
                 />
                 <img
-                    src="/fotos/despues.jpg"
+                    src={`${import.meta.env.BASE_URL}fotos/despues.jpg`}
                     alt="Propuesta museo"
                     style={{
                         position: "absolute",
