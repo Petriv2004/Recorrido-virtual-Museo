@@ -1,0 +1,273 @@
+import { useState, useEffect } from "react";
+
+const fotos = [
+  {
+    archivo: "/fotos/fachada-frontal.jpg",
+    titulo: "Fachada principal",
+    etiqueta: "Nodo de alta visibilidad",
+    descripcion: "Fachada doble sobre dos vías. Desde sistemas, representa un nodo con exposición máxima al flujo urbano.",
+  },
+  {
+    archivo: "/fotos/esquina-curva.jpg",
+    titulo: "Esquina curva",
+    etiqueta: "Punto de confluencia",
+    descripcion: "La curva del edificio actúa como concentrador de atención desde múltiples ángulos — ideal para señalética digital.",
+  },
+  {
+    archivo: "/fotos/interseccion.jpg",
+    titulo: "Intersección vial",
+    etiqueta: "Nodo de tráfico activo",
+    descripcion: "Cruce con semáforo de alta frecuencia. Alto flujo peatonal y vehicular — potencial de impacto digital masivo.",
+  },
+  {
+    archivo: "/fotos/cableado.jpg",
+    titulo: "Infraestructura de red",
+    etiqueta: "Red existente confirmada",
+    descripcion: "Cableado mixto eléctrico y de telecomunicaciones visible. Infraestructura base disponible para conectividad.",
+  },
+  {
+    archivo: "/fotos/calle-lateral.jpg",
+    titulo: "Acceso lateral",
+    etiqueta: "Entrada secundaria",
+    descripcion: "Calle de bajo tráfico en el costado del edificio. Zona tranquila para acceso alternativo al museo.",
+  },
+  {
+    archivo: "/fotos/contexto-urbano.jpg",
+    titulo: "Contraste urbano",
+    etiqueta: "Zona de transición",
+    descripcion: "Edificios modernos de 15+ pisos a media cuadra. El lote está en una zona de alta densidad y transformación urbana.",
+  },
+  {
+    archivo: "/fotos/via-principal.jpg",
+    titulo: "Vía principal",
+    etiqueta: "Corredor de flujo",
+    descripcion: "Vía arterial con tráfico constante. Confirma la visibilidad del lugar desde el sistema vial de Bogotá.",
+  },
+];
+
+const fotosExtendidas = [fotos[fotos.length - 1], ...fotos, fotos[0]];
+
+export default function Galeria() {
+  const [actual, setActual] = useState(0);
+  const [pausado, setPausado] = useState(false);
+
+  useEffect(() => {
+    if (pausado) return;
+    const intervalo = setInterval(() => {
+      setActual((prev) => (prev === fotos.length - 1 ? 0 : prev + 1));
+    }, 3500);
+    return () => clearInterval(intervalo);
+  }, [pausado]);
+
+  const anterior = () => {
+    setPausado(true);
+    setActual((prev) => (prev === 0 ? fotos.length - 1 : prev - 1));
+    setTimeout(() => setPausado(false), 6000);
+  };
+
+  const siguiente = () => {
+    setPausado(true);
+    setActual((prev) => (prev === fotos.length - 1 ? 0 : prev + 1));
+    setTimeout(() => setPausado(false), 6000);
+  };
+
+  const getEstilo = (i) => {
+    const diff = i - (actual + 1);
+    if (diff === 0) {
+      return { transform: "scale(1)", filter: "blur(0px)", opacity: 1, zIndex: 10, flex: "0 0 55%" };
+    } else if (Math.abs(diff) === 1) {
+      return { transform: "scale(0.85)", filter: "blur(3px)", opacity: 0.4, zIndex: 5, flex: "0 0 20%" };
+    } else {
+      return { opacity: 0, zIndex: 1, flex: "0 0 0%", pointerEvents: "none" };
+    }
+  };
+
+  const fotoActual = fotos[actual];
+
+  return (
+    <div style={{ minHeight: "100vh", padding: "4rem 0 2rem" }}>
+
+      <div style={{
+        padding: "0 2rem",
+        marginBottom: "3rem",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "flex-end",
+      }}>
+        <div>
+          <h1 style={{
+            fontSize: "clamp(48px, 8vw, 96px)",
+            lineHeight: 0.9,
+            color: "var(--texto)",
+          }}>
+            GALERÍA<br />DE CAMPO
+          </h1>
+          <p style={{
+            fontSize: "12px",
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            color: "var(--rojo)",
+            marginTop: "0.75rem",
+          }}>
+            Registro fotográfico · 3 junio 2026
+          </p>
+        </div>
+        <div style={{
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: "80px",
+          color: "var(--borde)",
+          lineHeight: 1,
+        }}>
+          {String(actual + 1).padStart(2, "0")}/{String(fotos.length).padStart(2, "0")}
+        </div>
+      </div>
+
+      <div style={{ position: "relative", overflow: "hidden" }}>
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "12px",
+          height: "80vh",
+          padding: "0 1rem",
+        }}>
+          {fotosExtendidas.map((foto, i) => {
+            const estilo = getEstilo(i);
+            return (
+              <div
+                key={i}
+                onClick={() => {
+                  const indexReal = i - 1;
+                  if (indexReal >= 0 && indexReal < fotos.length) {
+                    setPausado(true);
+                    setActual(indexReal);
+                    setTimeout(() => setPausado(false), 6000);
+                  }
+                }}
+                style={{
+                  ...estilo,
+                  height: "100%",
+                  overflow: "hidden",
+                  transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                  cursor: i !== actual + 1 ? "pointer" : "default",
+                  position: "relative",
+                  flexShrink: 0,
+                }}
+              >
+                <img
+                  src={foto.archivo}
+                  alt={foto.titulo}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                    pointerEvents: "none",
+                  }}
+                />
+                {i === actual + 1 && (
+                  <div style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%)",
+                    padding: "3rem 1.5rem 1.5rem",
+                    pointerEvents: "none",
+                  }}>
+                    <div style={{
+                      fontSize: "10px",
+                      letterSpacing: "0.15em",
+                      textTransform: "uppercase",
+                      color: "var(--rojo)",
+                      marginBottom: "0.4rem",
+                    }}>
+                      {foto.etiqueta}
+                    </div>
+                    <div style={{
+                      fontFamily: "'Bebas Neue', sans-serif",
+                      fontSize: "28px",
+                      letterSpacing: "0.08em",
+                      color: "#fff",
+                      marginBottom: "0.25rem",
+                    }}>
+                      {foto.titulo}
+                    </div>
+                    <p style={{
+                      fontSize: "12px",
+                      color: "rgba(255,255,255,0.7)",
+                      lineHeight: 1.5,
+                      margin: 0,
+                    }}>
+                      {foto.descripcion}
+                    </p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <button onClick={anterior} style={{
+          position: "absolute",
+          left: "1rem",
+          top: "50%",
+          transform: "translateY(-50%)",
+          background: "none",
+          color: "rgba(255,255,255,0.5)",
+          border: "0.5px solid rgba(255,255,255,0.2)",
+          borderRadius: "50%",
+          width: "44px",
+          height: "44px",
+          fontSize: "22px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 20,
+        }}>‹</button>
+
+        <button onClick={siguiente} style={{
+          position: "absolute",
+          right: "1rem",
+          top: "50%",
+          transform: "translateY(-50%)",
+          background: "none",
+          color: "rgba(255,255,255,0.5)",
+          border: "0.5px solid rgba(255,255,255,0.2)",
+          borderRadius: "50%",
+          width: "44px",
+          height: "44px",
+          fontSize: "22px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 20,
+        }}>›</button>
+      </div>
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        gap: "8px",
+        marginTop: "1.5rem",
+      }}>
+        {fotos.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => { setPausado(true); setActual(i); setTimeout(() => setPausado(false), 6000); }}
+            style={{
+              width: i === actual ? "24px" : "6px",
+              height: "2px",
+              border: "none",
+              background: i === actual ? "var(--rojo)" : "var(--borde)",
+              cursor: "pointer",
+              padding: 0,
+              transition: "all 0.3s",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}

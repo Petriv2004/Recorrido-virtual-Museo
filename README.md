@@ -93,14 +93,6 @@ perseverancia-digital/
 
 ---
 
-## Fechas clave
-
-| Fecha | Hito |
-|---|---|
-| 23 de junio de 2026 | Micropitch y planos comparativos |
-| 22 de julio de 2026 | Entrega final |
-
----
 
 ## Contexto académico
 
