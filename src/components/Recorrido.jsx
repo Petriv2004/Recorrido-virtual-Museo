@@ -53,20 +53,19 @@ export default function Recorrido() {
   const zona = zonas[activa];
 
   return (
-    <div style={{ minHeight: "100vh", padding: "4rem 2rem 2rem" }}>
+    <div style={{ minHeight: "100vh", padding: "2rem 1.25rem" }}>
 
-      {/* Título */}
-      <div style={{ marginBottom: "3rem" }}>
+      <div style={{ marginBottom: "2rem" }}>
         <h1 style={{
-          fontSize: "clamp(48px, 8vw, 96px)",
+          fontSize: "clamp(48px, 12vw, 96px)",
           lineHeight: 0.9,
           color: "var(--texto)",
         }}>
           RECORRIDO<br />VIRTUAL
         </h1>
         <p style={{
-          fontSize: "12px",
-          letterSpacing: "0.15em",
+          fontSize: "11px",
+          letterSpacing: "0.12em",
           textTransform: "uppercase",
           color: "var(--rojo)",
           marginTop: "0.75rem",
@@ -75,143 +74,126 @@ export default function Recorrido() {
         </p>
       </div>
 
-      {/* Contenido */}
+      {/* Selector de zonas horizontal en móvil */}
       <div style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 2fr",
-        gap: "0",
-        borderTop: "0.5px solid var(--borde)",
+        display: "flex",
+        gap: "8px",
+        overflowX: "auto",
+        paddingBottom: "1rem",
+        borderBottom: "0.5px solid var(--borde)",
+        marginBottom: "1.5rem",
+        scrollbarWidth: "none",
       }}>
-
-        {/* Lista de zonas */}
-        <div style={{
-          borderRight: "0.5px solid var(--borde)",
-          paddingRight: "2rem",
-          paddingTop: "2rem",
-        }}>
-          {zonas.map((z) => (
-            <div
-              key={z.id}
-              onClick={() => setActiva(z.id)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-                padding: "1.25rem 0",
-                borderBottom: "0.5px solid var(--borde)",
-                cursor: "pointer",
-                transition: "all 0.2s",
-              }}
-            >
-              <div style={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: "32px",
-                color: activa === z.id ? "var(--rojo)" : "var(--borde)",
-                lineHeight: 1,
-                transition: "color 0.2s",
-                minWidth: "40px",
-              }}>
-                {z.numero}
-              </div>
-              <div>
-                <div style={{
-                  fontFamily: "'Bebas Neue', sans-serif",
-                  fontSize: "18px",
-                  letterSpacing: "0.08em",
-                  color: activa === z.id ? "var(--texto)" : "var(--texto-secundario)",
-                  transition: "color 0.2s",
-                }}>
-                  {z.nombre}
-                </div>
-                <div style={{
-                  fontSize: "10px",
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  color: "var(--texto-secundario)",
-                  marginTop: "2px",
-                }}>
-                  {z.piso}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Detalle de zona activa */}
-        <div style={{
-          paddingLeft: "2rem",
-          paddingTop: "2rem",
-        }}>
-          <div style={{
-            height: "300px",
-            background: zona.color,
-            borderRadius: "var(--radio-lg)",
-            marginBottom: "2rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            transition: "background 0.4s ease",
-          }}>
-            <div style={{
+        {zonas.map((z) => (
+          <button
+            key={z.id}
+            onClick={() => setActiva(z.id)}
+            style={{
+              flexShrink: 0,
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "8px 14px",
+              background: activa === z.id ? "var(--rojo)" : "transparent",
+              border: "0.5px solid",
+              borderColor: activa === z.id ? "var(--rojo)" : "var(--borde)",
+              borderRadius: "4px",
+              cursor: "pointer",
+              transition: "all 0.2s",
+            }}
+          >
+            <span style={{
               fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "80px",
-              color: "rgba(0,0,0,0.1)",
-              letterSpacing: "0.05em",
+              fontSize: "13px",
+              color: activa === z.id ? "#fff" : "var(--texto-secundario)",
+              letterSpacing: "0.08em",
             }}>
-              {zona.numero}
-            </div>
-          </div>
+              {z.numero}
+            </span>
+            <span style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "11px",
+              color: activa === z.id ? "#fff" : "var(--texto-secundario)",
+              textTransform: "uppercase",
+              letterSpacing: "0.06em",
+              whiteSpace: "nowrap",
+            }}>
+              {z.nombre}
+            </span>
+          </button>
+        ))}
+      </div>
 
+      {/* Detalle zona activa */}
+      <div>
+        <div style={{
+          height: "240px",
+          background: zona.color,
+          borderRadius: "var(--radio-lg)",
+          marginBottom: "1.5rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transition: "background 0.4s ease",
+        }}>
           <div style={{
             fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(32px, 4vw, 48px)",
+            fontSize: "clamp(60px, 15vw, 100px)",
+            color: "rgba(0,0,0,0.1)",
             letterSpacing: "0.05em",
-            color: "var(--texto)",
-            lineHeight: 1,
-            marginBottom: "0.5rem",
           }}>
-            {zona.nombre}
+            {zona.numero}
           </div>
+        </div>
 
-          <div style={{
-            fontSize: "11px",
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            color: "var(--rojo)",
-            marginBottom: "1.25rem",
-          }}>
-            {zona.piso}
-          </div>
+        <div style={{
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: "clamp(28px, 7vw, 48px)",
+          letterSpacing: "0.05em",
+          color: "var(--texto)",
+          lineHeight: 1,
+          marginBottom: "0.5rem",
+        }}>
+          {zona.nombre}
+        </div>
 
-          <p style={{
-            fontSize: "14px",
-            color: "var(--texto-secundario)",
-            lineHeight: 1.7,
-            marginBottom: "1.5rem",
-            maxWidth: "480px",
-          }}>
-            {zona.descripcion}
-          </p>
+        <div style={{
+          fontSize: "11px",
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          color: "var(--rojo)",
+          marginBottom: "1rem",
+        }}>
+          {zona.piso}
+        </div>
 
-          <div style={{
-            display: "flex",
-            gap: "8px",
-            flexWrap: "wrap",
-          }}>
-            {zona.tags.map((tag) => (
-              <span key={tag} style={{
-                fontSize: "10px",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                padding: "4px 12px",
-                border: "0.5px solid var(--borde)",
-                color: "var(--texto-secundario)",
-                borderRadius: "var(--radio)",
-              }}>
-                {tag}
-              </span>
-            ))}
-          </div>
+        <p style={{
+          fontSize: "14px",
+          color: "var(--texto-secundario)",
+          lineHeight: 1.7,
+          marginBottom: "1.25rem",
+        }}>
+          {zona.descripcion}
+        </p>
+
+        <div style={{
+          display: "flex",
+          gap: "8px",
+          flexWrap: "wrap",
+        }}>
+          {zona.tags.map((tag) => (
+            <span key={tag} style={{
+              fontSize: "10px",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              padding: "4px 12px",
+              border: "0.5px solid var(--borde)",
+              color: "var(--texto-secundario)",
+              borderRadius: "var(--radio)",
+            }}>
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
     </div>

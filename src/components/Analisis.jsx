@@ -36,26 +36,27 @@ const colores = {
 
 export default function Analisis() {
   return (
-    <div style={{ minHeight: "100vh", padding: "4rem 2rem 2rem" }}>
+    <div style={{ minHeight: "100vh", padding: "2rem 1.25rem" }}>
 
-      {/* Título */}
       <div style={{
-        marginBottom: "3rem",
+        marginBottom: "2rem",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "flex-end",
+        alignItems: "flex-start",
+        flexWrap: "wrap",
+        gap: "1rem",
       }}>
         <div>
           <h1 style={{
-            fontSize: "clamp(48px, 8vw, 96px)",
+            fontSize: "clamp(48px, 12vw, 96px)",
             lineHeight: 0.9,
             color: "var(--texto)",
           }}>
             ANÁLISIS<br />DIGITAL
           </h1>
           <p style={{
-            fontSize: "12px",
-            letterSpacing: "0.15em",
+            fontSize: "11px",
+            letterSpacing: "0.12em",
             textTransform: "uppercase",
             color: "var(--rojo)",
             marginTop: "0.75rem",
@@ -67,8 +68,6 @@ export default function Analisis() {
           fontSize: "11px",
           color: "var(--texto-secundario)",
           letterSpacing: "0.08em",
-          textTransform: "uppercase",
-          textAlign: "right",
           lineHeight: 2,
         }}>
           <span style={{ color: "#4caf50" }}>● </span>Confirmado<br />
@@ -77,24 +76,24 @@ export default function Analisis() {
         </div>
       </div>
 
-      {/* Tabla de datos */}
       <div style={{
         display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
+        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
         gap: "0",
         borderTop: "0.5px solid var(--borde)",
       }}>
         {datos.map((seccion, si) => (
           <div key={seccion.categoria} style={{
-            borderRight: si < datos.length - 1 ? "0.5px solid var(--borde)" : "none",
-            padding: "2rem",
+            borderBottom: "0.5px solid var(--borde)",
+            borderRight: "0.5px solid var(--borde)",
+            padding: "1.5rem 1rem",
           }}>
             <div style={{
               fontFamily: "'Bebas Neue', sans-serif",
               fontSize: "13px",
               letterSpacing: "0.2em",
               color: "var(--rojo)",
-              marginBottom: "1.5rem",
+              marginBottom: "1.25rem",
             }}>
               {seccion.categoria}
             </div>
@@ -102,7 +101,7 @@ export default function Analisis() {
             <div style={{
               display: "flex",
               flexDirection: "column",
-              gap: "1.25rem",
+              gap: "1rem",
             }}>
               {seccion.items.map((item) => (
                 <div key={item.label} style={{
@@ -110,7 +109,7 @@ export default function Analisis() {
                   justifyContent: "space-between",
                   alignItems: "center",
                   borderBottom: "0.5px solid var(--borde)",
-                  paddingBottom: "1rem",
+                  paddingBottom: "0.75rem",
                 }}>
                   <div style={{
                     fontSize: "11px",
@@ -148,23 +147,23 @@ export default function Analisis() {
         ))}
       </div>
 
-      {/* Aporte desde sistemas */}
       <div style={{
-        marginTop: "4rem",
+        marginTop: "3rem",
         borderTop: "0.5px solid var(--borde)",
-        paddingTop: "2rem",
+        paddingTop: "1.5rem",
       }}>
         <div style={{
           fontFamily: "'Bebas Neue', sans-serif",
           fontSize: "13px",
           letterSpacing: "0.2em",
           color: "var(--rojo)",
-          marginBottom: "1.5rem",
+          marginBottom: "1.25rem",
         }}>
           Aporte desde ingeniería de sistemas
         </div>
         <div style={{
-          display: "flex",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
           gap: "0",
           borderTop: "0.5px solid var(--borde)",
         }}>
@@ -175,13 +174,13 @@ export default function Analisis() {
             { num: "04", titulo: "Galería de campo", desc: "Registro fotográfico del lugar analizado desde perspectiva de sistemas" },
           ].map((item, i) => (
             <div key={item.num} style={{
-              flex: 1,
-              padding: "1.5rem",
-              borderRight: i < 3 ? "0.5px solid var(--borde)" : "none",
+              padding: "1.25rem 1rem",
+              borderRight: "0.5px solid var(--borde)",
+              borderBottom: "0.5px solid var(--borde)",
             }}>
               <div style={{
                 fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: "48px",
+                fontSize: "40px",
                 color: "var(--borde)",
                 lineHeight: 1,
                 marginBottom: "0.5rem",
