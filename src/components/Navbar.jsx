@@ -1,14 +1,27 @@
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 
-export default function Navbar({ paginaActiva, setPagina }) {
+export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [menuAbierto, setMenuAbierto] = useState(false);
 
-  const tabs = [
-    { id: "lugar", label: "El Lugar" },
-    { id: "analisis", label: "Análisis" },
-    { id: "recorrido", label: "Recorrido" },
-    { id: "galeria", label: "Galería" },
-  ];
+  const scrollTo = (id) => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }
+    setMenuAbierto(false);
+  };
+
+const tabs = [
+  { tipo: "scroll", id: "barrio", label: "El Barrio" },
+  { tipo: "scroll", id: "proyectos", label: "Proyectos" },
+];
 
   return (
     <nav style={{
@@ -16,20 +29,26 @@ export default function Navbar({ paginaActiva, setPagina }) {
       alignItems: "center",
       justifyContent: "space-between",
       padding: "1rem 1.25rem",
-      position: "sticky",
+      position: "fixed",
       top: 0,
+      left: 0,
+      right: 0,
       zIndex: 100,
       borderBottom: "0.5px solid var(--borde)",
       backdropFilter: "blur(10px)",
       background: "rgba(17,17,17,0.95)",
     }}>
-      <div style={{
-        fontFamily: "'Bebas Neue', sans-serif",
-        fontSize: "16px",
-        letterSpacing: "0.1em",
-        color: "var(--texto)",
-        lineHeight: 1.2,
-      }}>
+      <div
+        onClick={() => navigate("/")}
+        style={{
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: "16px",
+          letterSpacing: "0.1em",
+          color: "var(--texto)",
+          lineHeight: 1.2,
+          cursor: "pointer",
+        }}
+      >
         LA PERSEVERANCIA
         <span style={{
           fontSize: "9px",
@@ -42,17 +61,11 @@ export default function Navbar({ paginaActiva, setPagina }) {
         </span>
       </div>
 
-      {/* Desktop tabs */}
-      <div style={{
-        display: "flex",
-        gap: "1.5rem",
-      }}
-        className="desktop-nav"
-      >
+      <div style={{ display: "flex", gap: "1.5rem" }} className="desktop-nav">
         {tabs.map((tab) => (
           <button
-            key={tab.id}
-            onClick={() => setPagina(tab.id)}
+            key={tab.label}
+            onClick={() => tab.tipo === "scroll" ? scrollTo(tab.id) : navigate(tab.ruta)}
             style={{
               background: "none",
               border: "none",
@@ -61,10 +74,10 @@ export default function Navbar({ paginaActiva, setPagina }) {
               fontSize: "11px",
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: paginaActiva === tab.id ? "var(--texto)" : "var(--texto-secundario)",
-              borderBottom: paginaActiva === tab.id ? "1px solid var(--rojo)" : "1px solid transparent",
+              color: location.pathname === tab.ruta ? "var(--texto)" : "var(--texto-secundario)",
+              borderBottom: location.pathname === tab.ruta ? "1px solid var(--rojo)" : "1px solid transparent",
               paddingBottom: "2px",
-              transition: "all 0.2s",
+              transition: "color 0.2s",
             }}
           >
             {tab.label}
@@ -72,24 +85,21 @@ export default function Navbar({ paginaActiva, setPagina }) {
         ))}
       </div>
 
-      {/* Hamburger móvil */}
       <button
-        onClick={() => setMenuAbierto(!menuAbierto)}
         className="mobile-nav-btn"
+        onClick={() => setMenuAbierto(!menuAbierto)}
         style={{
           background: "none",
           border: "none",
           cursor: "pointer",
           color: "var(--texto)",
           fontSize: "20px",
-          padding: "4px",
           display: "none",
         }}
       >
         {menuAbierto ? "✕" : "☰"}
       </button>
 
-      {/* Menú móvil desplegable */}
       {menuAbierto && (
         <div style={{
           position: "absolute",
@@ -102,13 +112,14 @@ export default function Navbar({ paginaActiva, setPagina }) {
           display: "flex",
           flexDirection: "column",
           gap: "1rem",
-        }}
-          className="mobile-menu"
-        >
+        }}>
           {tabs.map((tab) => (
             <button
-              key={tab.id}
-              onClick={() => { setPagina(tab.id); setMenuAbierto(false); }}
+              key={tab.label}
+              onClick={() => {
+                tab.tipo === "scroll" ? scrollTo(tab.id) : navigate(tab.ruta);
+                setMenuAbierto(false);
+              }}
               style={{
                 background: "none",
                 border: "none",
@@ -117,11 +128,10 @@ export default function Navbar({ paginaActiva, setPagina }) {
                 fontSize: "13px",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: paginaActiva === tab.id ? "var(--texto)" : "var(--texto-secundario)",
-                borderLeft: paginaActiva === tab.id ? "2px solid var(--rojo)" : "2px solid transparent",
+                color: "var(--texto-secundario)",
+                borderLeft: "2px solid var(--borde)",
                 paddingLeft: "0.75rem",
                 textAlign: "left",
-                transition: "all 0.2s",
               }}
             >
               {tab.label}

@@ -1,68 +1,72 @@
 export default function Hero() {
-    return (
-        <div style={{
-            padding: "2rem 1.5rem 1.5rem",
-            background: "var(--fondo-card)",
-            borderBottom: "0.5px solid var(--borde)",
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+<div style={{
+  minHeight: "auto",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  padding: "80px 1.25rem 2rem",
+}}>
+      <p style={{
+        fontSize: "11px",
+        letterSpacing: "0.2em",
+        textTransform: "uppercase",
+        color: "var(--rojo)",
+        marginBottom: "1rem",
+      }}>
+        Proyecto interdisciplinar · 2026
+      </p>
+
+      <h1 style={{
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: "clamp(60px, 18vw, 180px)",
+        lineHeight: 0.85,
+        color: "var(--texto)",
+        marginBottom: "2rem",
+      }}>
+        LA<br />PERSE-<br />VERANCIA
+      </h1>
+
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "2rem",
+        flexWrap: "wrap",
+      }}>
+        <p style={{
+          fontSize: "13px",
+          color: "var(--texto-secundario)",
+          lineHeight: 1.7,
+          maxWidth: "420px",
+          margin: 0,
         }}>
-            <div style={{
-                display: "inline-block",
-                fontSize: "11px",
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: "var(--rojo)",
-                background: "var(--rojo-claro)",
-                padding: "3px 10px",
-                borderRadius: "var(--radio)",
-                marginBottom: "0.75rem",
-                fontWeight: 500,
-            }}>
-                Propuesta de intervención · 2026
-            </div>
+          Un barrio con historia, identidad y comunidad.
+          Dos propuestas de intervención urbana desde
+          arquitectura e ingeniería de sistemas.
+        </p>
 
-            <h1 style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: "26px",
-                fontWeight: 700,
-                lineHeight: 1.2,
-                marginBottom: "0.5rem",
-            }}>
-                Casa Esquinera<br />de La Perseverancia
-            </h1>
-
-            <p style={{
-                fontSize: "13px",
-                color: "var(--texto-secundario)",
-                lineHeight: 1.6,
-                maxWidth: "480px",
-            }}>
-                Edificio patrimonial de 3 pisos con planta curva en esquina. Propuesta
-                de reconversión como museo comunitario del barrio.
-            </p>
-
-            <div style={{
-                display: "flex",
-                gap: "1.5rem",
-                marginTop: "1rem",
-                flexWrap: "wrap",
-            }}>
-                {[
-                    { icon: "📍", texto: "Cl 32 con Kr 4" },
-                    { icon: "🏛️", texto: "3 pisos + azotea" },
-                    { icon: "🕐", texto: "Est. ~1940" },
-                ].map((item) => (
-                    <div key={item.texto} style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "6px",
-                        fontSize: "12px",
-                        color: "var(--texto-secundario)",
-                    }}>
-                        <span>{item.icon}</span>
-                        <span>{item.texto}</span>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
+        <button
+          onClick={() => scrollTo("barrio")}
+          style={{
+            background: "none",
+            border: "0.5px solid var(--borde)",
+            color: "var(--texto-secundario)",
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: "11px",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            padding: "10px 20px",
+            cursor: "pointer",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Explorar ↓
+        </button>
+      </div>
+    </div>
+  );
 }

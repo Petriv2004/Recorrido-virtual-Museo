@@ -1,29 +1,32 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Lugar from "./components/Lugar";
-import Analisis from "./components/Analisis";
-import Recorrido from "./components/Recorrido";
-import Galeria from "./components/Galeria";
+import Hero from "./components/Hero";
+import Barrio from "./components/Barrio";
+import Territorio from "./components/Territorio";
+import Selector from "./components/Selector";
+import GrupoMuseo from "./components/GrupoMuseo";
+import GrupoCentro from "./components/GrupoCentro";
+
+function Inicio() {
+  return (
+    <div>
+      <section id="inicio"><Hero /></section>
+      <section id="barrio"><Barrio /></section>
+      <section id="territorio"><Territorio /></section>
+      <section id="proyectos"><Selector /></section>
+    </div>
+  );
+}
 
 export default function App() {
-  const [pagina, setPagina] = useState("lugar");
-
-  const renderPagina = () => {
-    switch (pagina) {
-      case "lugar": return <Lugar />;
-      case "analisis": return <Analisis />;
-      case "recorrido": return <Recorrido />;
-      case "galeria": return <Galeria />;
-      default: return <Lugar />;
-    }
-  };
-
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <Navbar paginaActiva={pagina} setPagina={setPagina} />
-      <main>
-        {renderPagina()}
-      </main>
-    </div>
+    <BrowserRouter basename="/Recorrido-virtual-Museo">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Inicio />} />
+        <Route path="/museo" element={<GrupoMuseo />} />
+        <Route path="/centro" element={<GrupoCentro />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

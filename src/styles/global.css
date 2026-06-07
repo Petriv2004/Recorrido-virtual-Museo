@@ -43,3 +43,7 @@ h1, h2, h3 {
   .mobile-menu { display: none !important; }
   .mobile-nav-btn { display: none !important; }
 }
+
+#mobile-menu.open {
+  display: flex !important;
+}
