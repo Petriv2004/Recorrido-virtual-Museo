@@ -1,35 +1,37 @@
 import { useState } from "react";
 
+const base = import.meta.env.BASE_URL;
+
 const espacios = [
   {
     num: "01",
-    nombre: "Recepción y Orientación",
-    desc: "Punto de entrada al centro donde la comunidad recibe información, asesoría inicial y es dirigida al servicio que necesita. Diseñado para ser accesible, cálido y funcional.",
-    img: null,
+    nombre: "Salas de Trabajo y Coworking",
+    desc: "En el nivel del sótano se ubican cuatro salas de trabajo y dos salas de coworking alrededor del núcleo de ascensores. Espacios flexibles para capacitaciones, asesorías y trabajo colaborativo, equipados con conectividad de alta velocidad bajo el estándar TIA/EIA 568.",
+    img: `${base}fotos/coworking.png`,
   },
   {
     num: "02",
-    nombre: "Taller de Oficios",
-    desc: "Espacio equipado para capacitaciones prácticas en oficios como carpintería, costura y electrónica. Fomenta el aprendizaje colectivo y el desarrollo de habilidades productivas.",
-    img: null,
+    nombre: "Teatro Comunitario",
+    desc: "También en el sótano, el teatro es un espacio multipropósito para eventos, capacitaciones y actividades culturales del barrio. Con capacidad para reuniones barriales y proyecciones, es el corazón social del Nodo.",
+    img: `${base}fotos/auditorio.png`,
   },
   {
     num: "03",
-    nombre: "Sala Comunitaria",
-    desc: "Área flexible para reuniones barriales, exposiciones y eventos culturales. Con capacidad para 40 personas, es el corazón social del centro.",
-    img: null,
+    nombre: "Zona Comercial",
+    desc: "En el primer piso se ubican cuatro locales de comercio y dos cuartos técnicos. Aquí los emprendedores y comerciantes de La Perseverancia exhiben y venden sus productos, con acceso directo a la calle que conecta el Nodo con la vida cotidiana del barrio.",
+    img: `${base}fotos/comercial.png`,
   },
   {
     num: "04",
-    nombre: "Huerta Urbana",
-    desc: "Jardín productivo en cubierta que integra la naturaleza al proyecto. Espacio de educación ambiental y producción de alimentos para la comunidad.",
-    img: null,
+    nombre: "Oficinas y Zona Verde",
+    desc: "El segundo piso organiza seis oficinas alrededor de una zona verde central. Aquí se concentra la gestión operativa del Nodo: atención a emprendedores, alianzas institucionales y administración general.",
+    img: `${base}fotos/Oficina.png`,
   },
   {
     num: "05",
-    nombre: "Zona de Emprendimiento",
-    desc: "Módulos individuales de trabajo para emprendedores locales. Incluye conexión a internet, mesas de trabajo compartidas y almacenamiento.",
-    img: null,
+    nombre: "Taller de Manualidades y Taller Gastronómico",
+    desc: "En el tercer piso (N +7.60), dos talleres conectados por un puente: uno de manualidades y otro gastronómico. Inspirados en los oficios tradicionales de La Perseverancia y en la memoria culinaria de su Plaza de Mercado.",
+    img: `${base}fotos/taller.png`,
   },
 ];
 
@@ -38,29 +40,29 @@ const emprendimientos = [
     num: "01",
     nombre: "Tejidos La Persi",
     categoria: "Textil",
-    desc: "Colectivo de mujeres del barrio que elabora tejidos artesanales a mano usando técnicas heredadas de generaciones anteriores. Sus productos se venden en ferias locales y mercados digitales.",
-    img: null,
+    desc: "Colectivo de mujeres del barrio que elabora tejidos artesanales a mano usando técnicas heredadas de generaciones anteriores. A través del Nodo accedieron a formación en marca y venta digital, y hoy sus productos llegan a ferias locales y mercados en línea.",
+    img: `${base}fotos/tejidos.png`,
   },
   {
     num: "02",
-    nombre: "Huella Verde",
+    nombre: "Sabores de la Plaza",
     categoria: "Gastronomía",
-    desc: "Emprendimiento de alimentación saludable basado en productos cultivados en la huerta urbana del centro. Ofrece almuerzos comunitarios y catering para eventos.",
-    img: null,
+    desc: "Emprendimiento familiar que rescata recetas tradicionales de la Plaza de Mercado de La Perseverancia. Con el acompañamiento del Nodo en gestión de costos y presentación de producto, ahora ofrece almuerzos comunitarios y catering para eventos del barrio.",
+    img: `${base}fotos/comida.png`,
   },
   {
     num: "03",
     nombre: "Taller del Barrio",
     categoria: "Reparación",
-    desc: "Servicio de reparación de electrodomésticos, bicicletas y muebles liderado por jóvenes del barrio capacitados en el taller de oficios del centro.",
-    img: null,
+    desc: "Servicio de reparación de electrodomésticos, bicicletas y muebles liderado por jóvenes del sector. Se formaron en el taller de oficios del Nodo y hoy generan ingresos atendiendo necesidades cotidianas de los vecinos.",
+    img: `${base}fotos/tallerE.png`,
   },
   {
     num: "04",
     nombre: "Raíces Gráficas",
     categoria: "Diseño",
-    desc: "Estudio de diseño gráfico comunitario que produce piezas visuales para negocios locales, rescatando iconografía e historia del barrio La Perseverancia.",
-    img: null,
+    desc: "Estudio de diseño gráfico comunitario que produce piezas visuales para negocios locales, rescatando la iconografía y la historia del barrio La Perseverancia, desde la chicha hasta la arquitectura obrera.",
+    img: `${base}fotos/diseno.png`,
   },
 ];
 
@@ -71,7 +73,7 @@ const talleres = [
     fecha: "Julio 2026",
     duracion: "4 semanas · Martes y Jueves",
     cupos: "20 cupos",
-    desc: "Aprende técnicas de corte, confección y reparación de ropa. Enfoque en moda sostenible y reutilización de materiales.",
+    desc: "Aprende técnicas de corte, confección y reparación de ropa. Enfoque en moda sostenible y reutilización de materiales, en el taller de manualidades del tercer piso.",
     estado: "Próximo",
   },
   {
@@ -80,25 +82,25 @@ const talleres = [
     fecha: "Agosto 2026",
     duracion: "3 semanas · Sábados",
     cupos: "15 cupos",
-    desc: "Taller práctico para digitalizar negocios locales: redes sociales, ventas en línea y herramientas básicas de gestión.",
+    desc: "Taller práctico para digitalizar negocios locales: redes sociales, ventas en línea y herramientas básicas de gestión, dirigido a comerciantes y emprendedores del barrio.",
     estado: "Próximo",
   },
   {
     num: "03",
-    titulo: "Huerta Urbana Básica",
+    titulo: "Educación Financiera para tu Negocio",
     fecha: "Septiembre 2026",
     duracion: "2 semanas · Fines de semana",
     cupos: "25 cupos",
-    desc: "Introducción al cultivo en espacios reducidos: siembra, riego, compostaje y aprovechamiento de cosechas en entorno urbano.",
+    desc: "Introducción a presupuestos, flujo de caja y manejo de ingresos y gastos para microempresarios. Pensado para quienes operan su negocio de manera informal y quieren formalizarse.",
     estado: "Abierto",
   },
   {
     num: "04",
-    titulo: "Carpintería Funcional",
+    titulo: "Cocina Tradicional de La Perseverancia",
     fecha: "Octubre 2026",
     duracion: "6 semanas · Lunes y Miércoles",
     cupos: "12 cupos",
-    desc: "Fabricación de muebles básicos con madera reciclada. El proyecto final consiste en construir una pieza para donar al centro.",
+    desc: "Recuperación de recetas y técnicas de la gastronomía del barrio, con énfasis en la memoria culinaria de la Plaza de Mercado. El proyecto final consiste en una muestra abierta a la comunidad.",
     estado: "Próximo",
   },
 ];
@@ -309,7 +311,7 @@ export default function GrupoCentro() {
             color: "var(--texto-secundario)",
             marginBottom: "0.75rem",
           }}>
-            Grupo 2 · Arquitectura
+            Centro comunitario · La Perseverancia
           </p>
           <h2 style={{
             fontFamily: "'Bebas Neue', sans-serif",
@@ -317,7 +319,7 @@ export default function GrupoCentro() {
             lineHeight: 0.9,
             color: "var(--texto)",
           }}>
-            NACE:<br />NODO DE AYUDA<br />COMUNITARIA Y<br />EMPRENDIMIENTO
+            NACE:<br />NODO DE APOYO<br />COMUNITARIO Y<br />EMPRENDIMIENTO
           </h2>
         </div>
         <div style={{
@@ -328,7 +330,7 @@ export default function GrupoCentro() {
           textAlign: "right",
           lineHeight: 2,
         }}>
-          Cra 4 # 31-76<br />
+          Cra. 4d # 31-77<br />
           La Perseverancia<br />
           Bogotá D.C.
         </div>
@@ -361,7 +363,7 @@ export default function GrupoCentro() {
             lineHeight: 0.95,
             color: "var(--texto)",
           }}>
-            QUÉ HACEMOS<br />COMO CENTRO
+            ¿QUÉ HACEMOS<br />COMO NODO?
           </h3>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
@@ -370,7 +372,7 @@ export default function GrupoCentro() {
             color: "var(--texto-secundario)",
             lineHeight: 1.8,
           }}>
-            NACE es un centro comunitario diseñado para el barrio La Perseverancia que articula tres ejes fundamentales: la formación en oficios, el apoyo al emprendimiento local y la cohesión social del territorio.
+            El Nodo de Apoyo Comunitario y Emprendimiento es un espacio para el barrio La Perseverancia que articula la formación en oficios, el acompañamiento a emprendedores locales y la cohesión social del territorio, sin perder la identidad histórica y cultural que distingue a este barrio.
           </p>
           <div style={{
             display: "grid",
@@ -381,7 +383,7 @@ export default function GrupoCentro() {
               { icono: "◈", titulo: "Formación", desc: "Talleres de oficios y habilidades para el trabajo." },
               { icono: "◉", titulo: "Emprendimiento", desc: "Acompañamiento y espacios para negocios locales." },
               { icono: "◌", titulo: "Comunidad", desc: "Punto de encuentro e integración barrial." },
-              { icono: "◎", titulo: "Sostenibilidad", desc: "Huerta urbana y economía circular integradas." },
+              { icono: "◎", titulo: "Patrimonio", desc: "La identidad de la Plaza de Mercado y la Chicha." },
             ].map((p) => (
               <div key={p.titulo} style={{
                 padding: "1.25rem",
@@ -454,7 +456,7 @@ export default function GrupoCentro() {
             lineHeight: 1.7,
             textAlign: "right",
           }}>
-            Cada espacio del centro fue diseñado para responder a una necesidad específica del barrio.
+            Cada espacio del Nodo fue diseñado para responder a una necesidad específica del barrio.
           </p>
         </div>
         <Carrusel items={espacios.map(e => ({ ...e, categoria: "Espacio" }))} />
@@ -497,7 +499,7 @@ export default function GrupoCentro() {
             lineHeight: 1.7,
             textAlign: "right",
           }}>
-            Iniciativas locales que el centro impulsa y acompaña en su crecimiento.
+            Iniciativas locales que el Nodo impulsa y acompaña en su crecimiento.
           </p>
         </div>
         <Carrusel items={emprendimientos} />
@@ -650,7 +652,7 @@ export default function GrupoCentro() {
           letterSpacing: "0.15em",
           color: "var(--texto-secundario)",
         }}>
-          Taller Internacional Italia 2026
+          Nodo de Apoyo Comunitario y Emprendimiento
         </div>
         <div style={{
           fontSize: "11px",

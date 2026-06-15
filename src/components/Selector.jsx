@@ -171,7 +171,7 @@ export default function Selector() {
           }}
         >
           <img
-            src={`${base}fotos/antes-centro.jpg`}
+            src={`${base}fotos/antes.jpg`}
             alt="Estado actual"
             style={{
               position: "absolute",
@@ -186,7 +186,7 @@ export default function Selector() {
             }}
           />
           <img
-            src={`${base}fotos/despues-centro.jpg`}
+            src={`${base}fotos/despues-centro.png`}
             alt="Propuesta centro"
             style={{
               position: "absolute",
